@@ -1,0 +1,22 @@
+My name is Hasan Sadaqa.. 
+This is the solution of assignment "Practice pip and virtualenv"
+......................................
+1)pip &pip3: is the package manager which is responsible about the installation and uninstallation the packages to your vertual environment.
+
+2)pip list: responsible of show the packages you have on your vertual environment
+
+3)deactivate This will deactivate your virtual environment
+
+4)pip3 list: the same of pip list but for mac.
+
+5)source myEnvironments/py3Env/bin/activate: we use this to activate our vertual environment in Windows command prompt
+
+6)call myEnvironments/py3Env/Scripts/activate:we use this to activate our vertual environment in Windows git bash.
+
+7)pip install Django==2.2.4: it used to install Django package wih version 2.2.4
+
+8)pip freeze: is the same for  pip list, but we use it to store the list of packages on a text file using this commad (on Windows command prompt) pip freeze > "name of text file".txt
+
+9)pip uninstall Django: we use this to uninstall a specific packages (in this case we want to uninstall Django)
+
+10)pip show Django: it will show us summery about django that we have installed, like version, author, summery, ..etc.
