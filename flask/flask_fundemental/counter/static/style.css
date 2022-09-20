@@ -1,0 +1,23 @@
+.container{
+    width: 20%;
+    margin: 200px auto;
+    text-align: center;
+}
+.function{
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 50px;
+}
+p{
+    font-size: xx-large;
+}
+button{
+    width: 80px;
+    height: 30px;
+    background-color: green;
+    border-radius: 10px;
+}
+.add{
+    background-color: red;
+}
