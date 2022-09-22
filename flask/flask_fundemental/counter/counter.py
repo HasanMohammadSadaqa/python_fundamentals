@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template, redirect, session
 app = Flask(__name__)
 app.secret_key = 'keep it secret, keep it safe'
@@ -9,12 +10,12 @@ def count():
     session['count'] += 1
     return render_template('index.html')
 
-@app.route('/destroy')
+@app.route('/destroy', methods=['post'])
 def destroy():
     session.clear()	
     return redirect('/')
 
-@app.route('/add_two')
+@app.route('/add_two',methods=['post'])
 def add_two():
     session['count'] += 1	
     return redirect('/')

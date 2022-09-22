@@ -12,10 +12,10 @@
         <h1>Counter</h1>
     <p> {{session['count']}} <span>times</span> </p>
     <div class="function">
-        <form action="/destroy">
+        <form action="/destroy" method="post">
             <button type="submit" class="reset">Reset</button>
         </form>
-        <form action="/add_two">
+        <form action="/add_two" method="post">
             <button type="submit" class="add">Add two </button>
         </form>
     </div>
