@@ -7,7 +7,10 @@ app.secret_key = 'keep it secret, keep it safe'
 def count():
     if 'count' not in session:
         session['count'] = 0
-    session['count'] += 1
+    else:
+        current_vists = session['count']
+        session['count'] = current_vists+1
+    # session['count'] += 1
     return render_template('index.html')
 
 @app.route('/destroy', methods=['post'])
