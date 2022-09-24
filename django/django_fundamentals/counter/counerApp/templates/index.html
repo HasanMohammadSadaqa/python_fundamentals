@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <div class="container">
+        <h2>Counter</h2>
+        <p> {{request.session.count}} <span>times</span> </p>
+    </div>
+    <div class="function">
+        <form action="/destroy" method="post">
+            {% csrf_token %}
+            <button type="submit" class="reset">Reset</button>
+        </form>
+        <form action="/add_two" method="post">
+            {% csrf_token %}
+            <button type="submit" class="add">Add two </button>
+        </form>
+    </div>
+</body>
+</html>
