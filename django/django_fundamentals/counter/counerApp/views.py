@@ -4,18 +4,16 @@ from django.shortcuts import render, redirect
 
 def counter(request):
     if 'count' not in request.session:
-        request.session ['count'] = 0
+        request.session['count'] = 0
     else:
-        request.session ['count'] +=1
+        request.session['count'] +=1
     return render(request, 'index.html')
 
 def destroy(request):
-    if request.method == 'post':
-        del request.session['count']
+    del request.session['count']
     return redirect("/")
 
 def add_tow(request):
-    if request.method =='post':
-        request.session['count']+=2
+    request.session['count']+=1
     return redirect("/")
 

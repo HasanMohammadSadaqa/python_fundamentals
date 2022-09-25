@@ -5,8 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>counter</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <style>
+        .container{
+    width: 20%;
+    margin: 0px auto;
+    text-align: center;
+}
+.function {
+        width: 200px;
+        display: flex;
+        justify-content: space-around;
+        margin: 0px auto;
+}
+
+p{
+    font-size: xx-large;
+}
+button{
+    width: 80px;
+    height: 30px;
+    background-color: green;
+    border-radius: 10px;
+}
+.add{
+    background-color: red;
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,11 +38,11 @@
         <p> {{request.session.count}} <span>times</span> </p>
     </div>
     <div class="function">
-        <form action="/destroy" method="post">
+        <form action="/destroy">
             {% csrf_token %}
             <button type="submit" class="reset">Reset</button>
         </form>
-        <form action="/add_two" method="post">
+        <form action="/add_two">
             {% csrf_token %}
             <button type="submit" class="add">Add two </button>
         </form>
