@@ -1,0 +1,22 @@
+1)python manage.py shell
+
+2)User.objects.create(first_name="hasan", last_name="mohammad", email_adress="hasan@gmail.com", age="24")
+
+3)User.objects.create(first_name="Mohammad", last_name="Ismail", email_adress="Mohammad@gmail.com", age="24")
+
+4)User.objects.create(first_name="Osama", last_name="Tbaileh", email_adress="Osama@gmail.com", age="20")
+
+5)User.objects.all()
+
+6)User.objects.last()
+
+7)User.objects.first()
+
+8)>>> c = User.objects.get(id=3)
+>>> c.last_name="Pancakes"
+>>> c.save()
+
+9) >>> c = User.objects.get(id=1)
+>>> c.delete()
+
+10)  c = User.objects.all().order_by("first_name")
