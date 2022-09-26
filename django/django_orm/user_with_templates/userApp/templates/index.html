@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C + R Users</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+<style>
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 10rem;
+    }
+</style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td> {{user.id}} </td>
+                <td> {{user.Name}} </td>
+                <td> {{user.Email}} </td>
+                <td> {{user.Age}} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr style="height:2px;border-width:0;color:black;background-color:black">
+    <h1>Add a User</h1>
+    <form action="process/" method="POST">
+        {% csrf_token %}
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first" id="first_name">
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last" id="last_name">
+        <label for="email">Email:</label>
+        <input type="email" name="e-mail" id="email">
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age">
+        <br>
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>
