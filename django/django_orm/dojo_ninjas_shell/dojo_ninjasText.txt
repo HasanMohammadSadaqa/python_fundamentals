@@ -1,0 +1,45 @@
+qyery 1) Query: Create 3 new dojos
+ Dojo.objects.create(name="dojo1", city="Ramallah", state="palestine")
+ Dojo.objects.create(name="dojo2", city="Dubai", state="UAE")
+ Dojo.objects.create(name="dojo3", city="AboDhabi", state="UAE")
+
+query 2) Delete the 3 dojos you just created
+>>> c=Dojo.objects.get(id=1)
+>>> c.delete()
+>>> c=Dojo.objects.get(id=2)
+>>> c.delete()
+>>> c=Dojo.objects.get(id=3)
+>>> c.delete()
+
+Query 3) Create 3 more dojos
+ Dojo.objects.create(name="dojo1", city="Ramallah", state="palestine")
+ Dojo.objects.create(name="dojo2", city="Dubai", state="UAE")
+ Dojo.objects.create(name="dojo3", city="AboDhabi", state="UAE")
+
+Query 4) Create 3 ninjas that belong to the first dojo
+>>> ninja1 = Ninja.objects.create(dojo = Dojo.objects.get(id=4),first_name = "ninja1", last_name = "ninja1_last")
+>>> ninja2 = Ninja.objects.create(dojo = Dojo.objects.get(id=4),first_name = "ninja2", last_name = "ninja2_last")
+>>> ninja3 = Ninja.objects.create(dojo = Dojo.objects.get(id=4),first_name = "ninja3", last_name = "ninja3_last")
+
+Query 5) Create 3 ninjas that belong to the second dojo
+>>> ninja4 = Ninja.objects.create(dojo = Dojo.objects.get(id=5), first_name="ninja4", last_name="ninja4_last")
+>>> ninja5 = Ninja.objects.create(dojo = Dojo.objects.get(id=5), first_name="ninja5", last_name="ninja5_last")
+>>> ninja6 = Ninja.objects.create(dojo = Dojo.objects.get(id=5), first_name="ninja6", last_name="ninja6_last")
+
+Query 6) Create 3 ninjas that belong to the third dojo
+>>> ninja7 = Ninja.objects.create(dojo = Dojo.objects.get(id=6), first_name="ninja7", last_name="ninja7_last")
+>>> ninja8 = Ninja.objects.create(dojo = Dojo.objects.get(id=6), first_name="ninja8", last_name="ninja8_last")
+>>> ninja9 = Ninja.objects.create(dojo = Dojo.objects.get(id=6), first_name="ninja9", last_name="ninja9_last")
+
+Query 7) Retrieve all the ninjas from the first dojo
+>>>Ninja.objects.filter(dojo=Dojo.objects.get(id=4))
+
+Query 7) Retrieve all the ninjas from the first dojo
+>>> Ninja.objects.filter(dojo=Dojo.objects.get(id=6))
+
+Query 8) Retrieve the last ninja's dojo
+>>> Ninja.objects.last()
+
+Query 10) create new dojo
+>>> Dojo.objects.create(name="dojo4", city="sharjah", state="UAE", desc="new dojo")
+
