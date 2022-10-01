@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authers</title>
+    <style>
+        main{
+            display: flex;
+            margin: 10px auto;
+        }
+        .adding_books{
+            width: 40rem;
+            height: 40rem;
+            display: flex;
+            justify-content: space-around;
+            border: 2px solid black;
+        }
+        .list_of_books{
+            width: 40rem;
+            height: 40rem;
+            border: 2px solid black;
+        }
+        .dscription{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <aside class="adding_books">
+            <form action="Add_books" method="post">
+                {% csrf_token %}
+                <h1>Add a Book</h1>
+                <p>Title <input type="text" name="title"> </p>
+                <p>Description </p> 
+                <textarea name="desc" cols="30" rows="5"></textarea>
+                <p><input type="submit" value="Add"></p>
+            </form>
+        </aside>
+        <aside class="list_of_books">
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <td> {{book.id}} </td>
+                        <td> {{book.title}} </td>
+                        <td> <a href="book/{{book.id}}">view</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </aside>
+    </main>
+</body>
+</html>

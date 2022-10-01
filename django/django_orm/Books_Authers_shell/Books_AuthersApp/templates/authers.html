@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authers</title>
+    <style>
+        main{
+            display: flex;
+            margin: 10px auto;
+        }
+        .adding_books{
+            width: 40rem;
+            height: 40rem;
+            display: flex;
+            justify-content: space-around;
+            border: 2px solid black;
+        }
+        .list_of_books{
+            width: 40rem;
+            height: 40rem;
+            border: 2px solid black;
+        }
+        .dscription{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <aside class="adding_authers">
+            <form action="Add_authers" method="post">
+                {% csrf_token %}
+                <h1>Add an Auther</h1>
+                <p>first name <input type="text" name="first_name"> </p>
+                <p>last name <input type="text" name="last_name"> </p>
+                <p>Notes </p> 
+                <textarea name="notes" cols="30" rows="5"></textarea>
+                <p><input type="submit" value="Add"></p>
+            </form>
+        </aside>
+        <aside class="list_of_books">
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% for auther in authers %}
+                    <tr>
+                        <td> {{auther.id}} </td>
+                        <td> {{auther.first_name}} {{auther.last_name}}  </td>
+                        <td> <a href="/authers/{{auther.id}}/">view</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </aside>
+    </main>
+</body>
+</html>
