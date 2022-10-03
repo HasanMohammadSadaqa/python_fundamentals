@@ -1,7 +1,3 @@
-from enum import auto
-from imp import release_lock
-from platform import release
-from turtle import title
 from django.db import models
 
 class Shows(models.Model):
@@ -17,12 +13,13 @@ def show_all_shows():
 
 
 def create_show(request):
-    Shows.objects.create(
+    my_show = Shows.objects.create(
         title = request.POST['title'],
         network= request.POST['network'],
         release_date= request.POST['release_date'],
         desc= request.POST['desc']
     )
+    return my_show
 
 def delete(request, show_id):
     c = Shows.objects.get(id = show_id)
@@ -31,11 +28,11 @@ def delete(request, show_id):
 def edit(request, show_id):
     return Shows.objects.get(id=show_id)
 
-# def update(request, show_id):
-#     the_show = Shows.objects.get(id=show_id)
-#     the_show.title=request.POST['title']
-#     the_show.network= request.POST['network']
-#     the_show.release_date= request.POST['release_date']
-#     the_show.desc= request.POST['desc']
-#     the_show.save()
-#     return the_show
+def update(request, show_id):
+    the_show = Shows.objects.get(id=show_id)
+    the_show.title=request.POST['title']
+    the_show.network= request.POST['network']
+    the_show.release_date= request.POST['release_date']
+    the_show.desc= request.POST['desc']
+    the_show.save()
+    return the_show
