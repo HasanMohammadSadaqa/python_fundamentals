@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login & registration</title>
+    <style>
+        .container{
+            display: flex;
+        }
+        aside{
+            width: 50rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="registration">
+            <h1>Registration</h1>
+            {% for error in messages %}
+            <ul>
+                <li> {{error}} </li>
+            </ul>
+            {% endfor %}
+            <form action="/reg" method="POST">
+                {% csrf_token %}
+                <p>First Name: <input type="text" name="first_name"> </p>
+                <p>Last Name: <input type="text" name="last_name"> </p>
+                <p>Email: <input type="email" name="email"> </p>
+                <p>Passwprd: <input type="password" name="pass"> </p>
+                <p>Confirm PW: <input type="password" name="passconf"> </p>
+                <input type="submit" value="Register">
+            </form>
+        </aside>
+        <aside class="login">
+            <h1>Login</h1>
+            <form action="/success" method="post">
+                {% csrf_token %}
+                <p>Email: <input type="email" name="email"> </p>
+                <p>Passwprd: <input type="password" name="pass"> </p>
+                <input type="submit" value="log in">
+            </form>
+        </aside>
+    </div>
+</body>
+</html>
