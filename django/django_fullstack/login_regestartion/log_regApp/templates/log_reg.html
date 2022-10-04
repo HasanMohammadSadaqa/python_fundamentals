@@ -35,11 +35,11 @@
         </aside>
         <aside class="login">
             <h1>Login</h1>
-            <form action="/success" method="post">
+            <form action="/login" method="post">
                 {% csrf_token %}
                 <p>Email: <input type="email" name="email"> </p>
                 <p>Passwprd: <input type="password" name="pass"> </p>
-                <input type="submit" value="log in">
+                <input type="submit" value="login">
             </form>
         </aside>
     </div>
