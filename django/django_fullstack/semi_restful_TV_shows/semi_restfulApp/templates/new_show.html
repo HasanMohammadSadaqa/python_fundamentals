@@ -17,6 +17,11 @@
 </head>
 <body>
     <h1>Add a New Show</h1>
+    <ul>
+        {% for error in messages %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
     <form action="/shows/create/" method="post">
         {% csrf_token %}
         <p>Title</p>

@@ -17,6 +17,11 @@
 </head>
 <body>
     <h1>Edit Show {{the_show.id}} </h1>
+    <ul>
+        {% for error in messages %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
     <form action="/shows/{{the_show.id}}/update" method="post">
         {% csrf_token %}
         <p>Title</p>
