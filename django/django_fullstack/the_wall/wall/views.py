@@ -24,20 +24,17 @@ def creat(request):
             pw = pw_hash
         )
         request.session['user_id'] = new_user.id
+        print("sssssssssssssssssssssssssssssssssssssss")
         return redirect("/show")
 
 def login(request):
     errors = User.objects.login_validator(request.POST)
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
             print(errors)
-            print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
         return redirect("/")
     else:
-        print("sssssssssssssssssssssssssssssssssssssss")
         user=User.objects.get(email=request.POST['email'])
         request.session['id'] = user.id
         return redirect("/show")

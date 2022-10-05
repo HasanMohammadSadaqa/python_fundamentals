@@ -8,6 +8,7 @@ urlpatterns = [
     path('login', views.login),
     path('show/', views.show),
     path('create/message', views.message),
-    path('create/comment', views.comment)
+    path('create/comment', views.comment),
+    path('destroy', views.destroy)
 
 ]

@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <p class="navbar-brand mb-0">Coding Dojo Wall </p>
-        <p class="navbar-brand ml-auto mb-0">Welcome {{user.fname}} {{user.lname}}</p>
+        <p class="navbar-brand ml-auto mb-0">Welcome {{this_user.fname}} {{this_user.lname}}</p>
         <a class="navbar-brand" href="/destroy">Log Out</a>
     </nav>
     <div class="container-fluid">
@@ -21,7 +21,7 @@
             <textarea class="form-control" name="content" id="" cols="30" rows="3"></textarea>
             <button class="btn btn-primary mt-3" type="submit">Send message</button>
         </form>
-        {% for message in messages %}
+        {% for message in messages reversed %}
         <p>{{message.user.fname}} {{message.user.lname}} - {{message.created_at}}:</p>
         <p>{{message.content}}</p>
         <div class="container">
