@@ -24,7 +24,6 @@ def creat(request):
             pw = pw_hash
         )
         request.session['user_id'] = new_user.id
-        print("sssssssssssssssssssssssssssssssssssssss")
         return redirect("/show")
 
 def login(request):
