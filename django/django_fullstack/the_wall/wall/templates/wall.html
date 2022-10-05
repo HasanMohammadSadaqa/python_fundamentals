@@ -15,7 +15,7 @@
         <a class="navbar-brand" href="/destroy">Log Out</a>
     </nav>
     <div class="container-fluid">
-        <form class="form-group mt-3" action="/creat/message" method="POST">
+        <form class="form-group mt-3" action="/create/message" method="post">
             {% csrf_token %}
             <p>Create a new message:</p>
             <textarea class="form-control" name="content" id="" cols="30" rows="3"></textarea>

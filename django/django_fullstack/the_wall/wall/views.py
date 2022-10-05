@@ -57,7 +57,7 @@ def show(request):
 
 def message(request):
     Message.objects.create(
-        user =User.objects.get(id=request.session[id]),
+        user =User.objects.get(id=request.session['id']),
         content = request.POST['content']
     )
     return redirect("/show")
@@ -66,7 +66,7 @@ def message(request):
 def comment(request):
     Comment.objects.create(
         message = Message.objects.get(id = request.POST['messageid']),
-        user =User.objects.get(id=request.session[id]),
+        user =User.objects.get(id=request.session['id']),
         content = request.POST['content']
     )
     return redirect("/show")  
