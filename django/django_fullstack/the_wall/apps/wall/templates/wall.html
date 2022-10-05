@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <p class="navbar-brand mb-0">Coding Dojo Wall </p>
+        <p class="navbar-brand ml-auto mb-0">Welcome {{user.fname}} {{user.lname}}</p>
+        <a class="navbar-brand" href="/destroy">Log Out</a>
+    </nav>
+    <div class="container-fluid">
+        <form class="form-group mt-3" action="/creat/message" method="POST">
+            {% csrf_token %}
+            <p>Create a new message:</p>
+            <textarea class="form-control" name="content" id="" cols="30" rows="3"></textarea>
+            <button class="btn btn-primary mt-3" type="submit">Send message</button>
+        </form>
+        {% for message in messages %}
+        <p>{{message.user.fname}} {{message.user.lname}} - {{message.created_at}}:</p>
+        <p>{{message.content}}</p>
+        <div class="container">
+            {% for comment in comments %}
+            {% if comment.message.id == message.id %}
+            <p>{{comment.user.fname}} {{comment.user.lname}} - {{comment.created_at}} :</p>
+            <p>{{comment.content}}</p>
+            {% endif %}
+            {% endfor %}
+            <form class="form-group mt-3" action="/create/comment" method="post">
+                {% csrf_token %}
+                <p>Create new comment:</p>
+                <textarea class="form-control" name="content" id="" cols="30" rows="3"></textarea>
+                <input type="hidden" name="messageid" value="{{message.id}}">
+            <button class="btn btn-primary mt-3" type="submit">Send comment</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

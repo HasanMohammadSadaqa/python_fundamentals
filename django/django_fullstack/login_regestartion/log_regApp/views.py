@@ -9,8 +9,7 @@ import bcrypt
 #     return render(request, "log_reg.html")
 
 def root(request):
-    context = {"users": User.objects.all()}
-    return render(request, "log_reg.html", context)
+    return render(request, "log_reg.html")
 
 def registration(request):
     errors = User.objects.validation(request.POST)
@@ -24,7 +23,7 @@ def registration(request):
         first_name=request.POST["first_name"],
         last_name=request.POST["last_name"],
         email=request.POST["email"],
-        Password=pw_hash,
+        password=pw_hash,
     )
     return redirect('/')
 
@@ -33,32 +32,12 @@ def check_login(request):
     user = User.objects.filter(email=request.POST['email'])
     if user :
         loggd_user = user[0]
-        if bcrypt.checkpw(request.POST['pass'].encode(), loggd_user.Password.encode()):
+        if bcrypt.checkpw(request.POST['pass'].encode(), loggd_user.password.encode()):
             print('1')
             request.session['user_id'] = loggd_user.id
             request.session['name'] = loggd_user.first_name
             return redirect("/success")
         return redirect("/")
-
-
-
-
-
-    # user = User.objects.filter(email=request.POST["email"])
-    # print("1")
-    # if user:  # if True (email is found with registration database)
-    #     print("2")
-    #     logged_user = user[0]
-    #     print("3")
-    #     # if bcrypt.checkpw(request.POST['pass'].encode(), logged_user.Password.encode()):
-    #     if bcrypt.checkpw(request.POST['pass'].encode(), logged_user.Password.encode()):
-            
-    #             print("4")
-    #             request.session["userid"] = logged_user.id
-    #             request.session['name'] = logged_user.first_name
-    #             print("5")
-    #             return redirect("/success")
-    #     return redirect("/")
 
 def show_registors(request):
     return render(request, 'welcoming.html')
