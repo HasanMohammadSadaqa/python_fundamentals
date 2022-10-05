@@ -27,12 +27,16 @@ class UserManager(models.Manager):
         return errors
 
     def login_validator(self,postData):
-        errors={}
+        errors={}        
         checkemail=postData['email']
+        if checkemail=='':
+            errors['email_empty']="Email is empty"
+            return errors
         user = User.objects.filter(email=checkemail)
-        if len(user) < 1:
-            errors['email']="Invalid email"
-        if bcrypt.checkpw(postData['pw'].encode(), user[0].pw.encode())== False:
+        if not user:
+            errors['wrong_email']="Email is not found"
+            return errors
+        if not bcrypt.checkpw(postData['pw'].encode(), user[0].pw.encode()):
             errors['password']="Invalid password"
         return errors
 
