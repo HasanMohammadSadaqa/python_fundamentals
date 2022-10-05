@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import render, redirect
 from log_regApp import models
 from .models import User
@@ -43,7 +42,7 @@ def show_registors(request):
     return render(request, 'welcoming.html')
 
 def logout_user(request):
-    del request.session["userid"]
+    del request.session["user_id"]
     del request.session["name"]
     return redirect("/")
 
