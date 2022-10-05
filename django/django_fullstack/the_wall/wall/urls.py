@@ -1,9 +1,8 @@
 from django.urls import path
+from wall import views
 
-from apps.wall import views
-from . import urls
 
-urlspatterns = [
+urlpatterns = [
     path('', views.root),
     path('registration', views.creat),
     path('login', views.login),

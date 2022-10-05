@@ -2,7 +2,7 @@ from multiprocessing import context
 from django.shortcuts import render, redirect
 from .models import User, Message, Comment
 from django.contrib import messages
-import bcrybt
+import bcrypt
 
 
 def root(request):
@@ -16,10 +16,10 @@ def creat(request):
             print(errors)
         return redirect("/")
     else:
-        pw_hash = bcrypt.hashpw(request.POST['pw'].encode(), bcrypt.gensalt())
+        pw_hash = bcrypt.hashpw(request.POST['pw'].encode(), bcrypt.gensalt()).decode()
         new_user = User.objects.create(
             fname = request.POST['fname'],
-            lame = request.POST['lname'],
+            lname = request.POST['lname'],
             email = request.POST['email'],
             pw = pw_hash
         )
@@ -28,12 +28,16 @@ def creat(request):
 
 def login(request):
     errors = User.objects.login_validator(request.POST)
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
             print(errors)
+            print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
         return redirect("/")
     else:
+        print("sssssssssssssssssssssssssssssssssssssss")
         user=User.objects.get(email=request.POST['email'])
         request.session['id'] = user.id
         return redirect("/show")

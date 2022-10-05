@@ -1,9 +1,6 @@
-import email
-import imp
-from unicodedata import name
 from django.db import models
 import re
-import bcrybt 
+import bcrypt 
 
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -15,27 +12,28 @@ class UserManager(models.Manager):
             errors['fname']="First Name must be at least 2 charachters long."
         # if not name_regex.match(postData['fname']):
         #     errors['fname'] = "First name must include letters only"
-        if len(postData['name']) < 2:
+        if len(postData['lname']) < 2:
             errors['lname']="Last Name must be at least 2 charachters long."
         # if not name_regex.match(postData['lname']):
         #     errors['lname'] = "Last name must include letters only"
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Invalid email address"
         if len(postData['email']) < 1:
-            errors['email']:"Email is required"
+            errors['email'] = "Email is required"
         if len(postData['pw']) < 8:
             errors['pw'] = "Password must be at least 8 charachters."
         if postData['pw'] != postData['checkpw']:
             errors['checkpw'] = "Password do not match"
         return errors
+
     def login_validator(self,postData):
         errors={}
         checkemail=postData['email']
         user = User.objects.filter(email=checkemail)
         if len(user) < 1:
-            errors['login']="Invalid email or password"
-        elif not bcrybt.checkpw(postData['pw'].encode(), user[0].pw.encode()):
-            errors['login']="Invalid email or password"
+            errors['email']="Invalid email"
+        if bcrypt.checkpw(postData['pw'].encode(), user[0].pw.encode())== False:
+            errors['password']="Invalid password"
         return errors
 
 
@@ -49,15 +47,15 @@ class User(models.Model):
     objects = UserManager()
 
 class Message(models.Model):
-    user=models.ForeignKey(User, related_name="message")
+    user=models.ForeignKey(User, related_name="message", on_delete=models.CASCADE)
     content=models.TextField()
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
 
 
 class Comment(models.Model):
-    message=models.ForeignKey(Message, related_name="comment")
-    user=models.ForeignKey(User, related_name="comment")
+    message=models.ForeignKey(Message, related_name="comment", on_delete= models.CASCADE)
+    user=models.ForeignKey(User, related_name="comment", on_delete= models.CASCADE)
     content=models.TextField()
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
