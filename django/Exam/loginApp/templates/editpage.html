@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        form{
+            margin-left: 200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <p class="navbar-brand mb-0">Arbortry </p>
+        <p class="navbar-brand ml-auto mb-0">Welcome, {{request.session.firstname}} {{request.session.lastname}} !</p>
+        <a class="navbar-brand" href="/user/account">My Tree</a> 
+        <a class="navbar-brand" href="/destroy">Log Out</a>
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+    </nav>
+    <p>a site to track randomly planted tree </p>
+
+    <form class="form-group col-6" action="/update/{{the_tree.id}}" method="POST">
+        {% csrf_token %}
+        <h1>Re-Plant Your Tree</h1>
+        <label for="species">species:</label>
+        <input class="form-control" type="text" name="species" value="{{the_tree.species}}">
+        <label for="location">Location:</label>
+        <input class="form-control" type="text" name="location" value="{{the_tree.location}}">
+        <label for="reason">Reason:</label>
+        <input class="form-control" type="text" name="reason" value="{{the_tree.reason}}">
+        <label for="date">Date Planted:</label>
+        <input class="form-control" type="date" name="date" value="{{the_tree.date|date:'Y-m-d'}}">
+        <button class="btn btn-primary mt-3" type="submit">Update</button>

@@ -1,3 +1,5 @@
+from enum import auto
+from pydoc import classname
 from django.db import models
 import re
 import bcrypt 
@@ -49,3 +51,28 @@ class User(models.Model):
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+
+class PlantManager(models.Manager):
+    def new_tree_validator(self, postdata):
+        errors = {}
+        print("111111111111111111111111111111111111111111111111")
+        if len(postdata["species"]) < 5:
+            errors["species"] = "species must be at least 5 charachters."
+        if len(postdata["location"]) < 2:
+            errors["location"] = "species must be at least 2 charachters."
+        if len(postdata["reason"]) > 50:
+            errors["reason"] = "Reason must be maximum 50 charachters. "
+        return errors
+
+
+class Plant(models.Model):
+    planted_by = models.ForeignKey(User, related_name="plants", on_delete = models.CASCADE)
+    visited_by = models.ManyToManyField(User, related_name="visited_trees")
+    species = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    reason = models.CharField(max_length=255)
+    date = models.DateTimeField()
+    created_at= models.DateTimeField(auto_now_add=True)
+    updated_at= models.DateTimeField(auto_now=True)
+    objects=PlantManager()

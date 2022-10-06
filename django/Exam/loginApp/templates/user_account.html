@@ -7,33 +7,37 @@
     <title>Wall</title>
     {% load static %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        form{
+            margin-left: 200px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-light bg-light">
         <p class="navbar-brand mb-0">Arbortry </p>
-        <p class="navbar-brand ml-auto mb-0">Welcome {{this_user.firstname}} {{this_user.lastname}}!</p>
-        <a class="navbar-brand" href="/user/account">My Tree</a> 
-        <a class="navbar-brand" href="/new/tree">Plant a Tree</a>
-        <a class="navbar-brand" href="/destroy">Log Out</a> 
+        <p class="navbar-brand ml-auto mb-0">Welcome, {{request.session.firstname}} {{request.session.lastname}} !</p>
+        <a class="navbar-brand" href="/destroy">Log Out</a>
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
     </nav>
     <p>a site to track randomly planted tree </p>
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">species</th>
-            <th scope="col">planted by</th>
-            <th scope="col">visitor</th>
+            <th scope="col">Date planted</th>
             <th scope="col">Actions </th>
         </tr>
         </thead>
         <tbody>
-            {% for plant in all_plants %}
-        <tr>    
-            <th scope="row"> {{plant.species}} </th>
-            <td>{{plant.planted_by.fname}} {{plant.planted_by.lname}}</td>
-            <td>{{plant.visited_by.fname}} {{plant.visited_by.lname}}</td>
-            <td> <a href="/show/{{plant.id}}">details</a> </td>
+        {% for user in users %}
+            {% for tree in user.plants.all %}
+        <tr>
+            <th scope="row"> {{tree.species}} </th>
+            <td>{{tree.date}}</td>
+            <td> <a href="/delete/{{tree.id}}">delete</a> | <a href="/edit/{{tree.id}}/">edit</a></td>
         </tr>
+            {% endfor %}
         {% endfor %}
         </tbody>
     </table>
