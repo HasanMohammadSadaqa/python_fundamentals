@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        main{
+            display: flex;
+        }
+        .books{
+            margin-left: 100px;
+            width: 50rem;
+        }
+        p{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <!-- <p class="navbar-brand mb-0">Coding Dojo Wall </p> -->
+        <p class="navbar-brand ml-auto mb-0">Welcome, {{this_user.fname}} {{this_user.lname}}!</p>
+        <a class="navbar-brand" href="/destroy">Log Out</a>
+    </nav>
+    <main>
+        <form class="form-group col-6" action="/add_favorite_book" method="post">
+            {% csrf_token %}
+            <h1>Add a Favorite Book</h1>
+            {% for error in messages %}
+            <ul>
+                <li>
+                    {{error}}
+                </li>
+            </ul>
+            {% endfor %}
+            <label for="title">Title:</label>
+            <input class="form-control" type="text" name="title">
+            <label for="desc">Description:</label>
+            <input class="form-control" type="text" name="desc">
+            <button class="btn btn-primary mt-3" type="submit">Add</button>
+        </form>
+        <div class="books">
+            <h1>All Book</h1>
+            <div>
+                {% for book in all_books %}
+                <p class="navbar-brand mb-2"><a href=""> {{book.title}}</a> </p>
+                <p class="navbar-brand mb-2"> {{book.uploaded_by.fname}} {{book.uploaded_by.lname}} </p>
+                {% if book in books_liked_by_user %}
+                <p class="navbar-brand mb-2"> this is one of your favorites </p>
+                {% else %}
+                <p class="navbar-brand mb-2"> <a href="">Add to favorites</a> </p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
